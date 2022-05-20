@@ -1,7 +1,7 @@
-﻿using Xunit;
-using Xunit.Abstractions;
-using PhysicalUnits;
+﻿using PhysicalUnits;
 using System;
+using Xunit;
+using Xunit.Abstractions;
 
 namespace DataTypesTests
 {
@@ -42,7 +42,7 @@ namespace DataTypesTests
             Unit unitFour = Unit.Parse(four);
             Unit unitFive = Unit.Parse(five);
             Unit unitSix = Unit.Parse(six);
-            Unit unitSeven = Unit.Parse(seven)*'k'*'m';
+            Unit unitSeven = Unit.Parse(seven) * 'k' * 'm';
             //Assert
             Assert.Equal(Units.Acceleration, unitOne);
             Assert.Equal(Units.Acceleration, unitTwo);
@@ -112,7 +112,7 @@ namespace DataTypesTests
             Assert.Equal("g", a.ToString());
             Assert.Equal("km", b.ToString());
             Assert.Equal("A", c.ToString());
-            Assert.Equal(MetricPrefixExponents.micro.GetSymbol()+"mol", d.ToString());
+            Assert.Equal(MetricPrefixExponents.micro.GetSymbol() + "mol", d.ToString());
         }
         [Fact]
         public void ConvertTest()
