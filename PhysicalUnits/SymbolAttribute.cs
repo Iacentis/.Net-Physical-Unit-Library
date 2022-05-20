@@ -1,8 +1,9 @@
 ﻿namespace PhysicalUnits
 {
-    internal class SymbolAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Property)]
+    internal sealed class SymbolAttribute : Attribute
     {
-        public string Value { get; set; }
+        public string Value { get; private set; }
         public SymbolAttribute(string value)
         {
             Value = value;

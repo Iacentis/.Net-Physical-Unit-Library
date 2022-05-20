@@ -61,7 +61,7 @@
         internal const char SuperScriptMinus = (char)0x207B;
         internal const string ExponentDigits = "^Â";
         internal const string NumericDigits = "-0123456789";
-        internal static string ToSuperScript(this int number)
+        internal static string ToSuperScript(this int number, IFormatProvider? formatProvider = null)
         {
             if (number == 0 ||
                 number == 1)
@@ -79,7 +79,7 @@
             }
 
 
-            Superscript += new string(number.ToString()
+            Superscript += new string(number.ToString(formatProvider)
                                             .Select(x => SuperscriptDigits[x - '0'])
                                             .ToArray()
                                       );
@@ -88,7 +88,7 @@
         }
         internal static int FromSuperScript(this string superscript)
         {
-            if (superscript.Length == 0 || superscript == string.Empty)
+            if (superscript.Length == 0 || string.IsNullOrEmpty(superscript))
             {
                 return 1;
             }
