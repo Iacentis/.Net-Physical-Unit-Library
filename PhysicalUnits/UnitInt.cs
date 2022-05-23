@@ -7,6 +7,11 @@ namespace PhysicalUnits
         public int Value { get; set; }
         public Unit Unit { get; set; } = Units.None;
 
+        public UnitInt(int value, Unit unit)
+        {
+            Value = value;
+            Unit = unit;
+        }
         public override string ToString()
         {
             return ToString(null);
@@ -27,11 +32,6 @@ namespace PhysicalUnits
                 Value = int.Parse(source.Split(' ').First(), formatProvider),
                 Unit = Unit.Parse(source[source.IndexOf(' ', StringComparison.InvariantCulture)..])
             };
-        }
-        public UnitInt(int value, Unit unit)
-        {
-            Value = value;
-            Unit = unit;
         }
 
         public static UnitInt operator *(UnitInt left, UnitInt right)

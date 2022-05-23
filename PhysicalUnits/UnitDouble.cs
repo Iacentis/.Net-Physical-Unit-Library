@@ -7,6 +7,11 @@ namespace PhysicalUnits
         public double Value { get; set; }
         public Unit Unit { get; set; } = Units.None;
 
+        public UnitDouble(double value, Unit unit)
+        {
+            Value = value;
+            Unit = unit;
+        }
         public override string ToString()
         {
             return ToString(null);
@@ -30,11 +35,6 @@ namespace PhysicalUnits
             };
         }
 
-        public UnitDouble(double value, Unit unit)
-        {
-            Value = value;
-            Unit = unit;
-        }
 
         public static UnitDouble operator *(UnitDouble left, UnitDouble right)
         {
