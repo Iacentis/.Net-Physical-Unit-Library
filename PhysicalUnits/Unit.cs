@@ -189,7 +189,6 @@ namespace PhysicalUnits
         {
             return right * left;
         }
-
         public static Unit operator *(Unit left, char right)
         {
             MetricPrefixExponents value = UnitSymbolLibrary.FromPrefixSymbol(right);
@@ -205,6 +204,41 @@ namespace PhysicalUnits
         public static Unit operator *(char left, Unit right)
         {
             return right * left;
+        }
+        public static bool operator ==(Unit left, Unit right)
+        {
+            if (left is null)
+            {
+                return right is null;
+            }
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Unit left, Unit Right)
+        {
+            return !(left == Right);
+        }
+        public static bool operator ==(Unit left, string right)
+        {
+            if (left is null)
+            {
+                return false;
+            }
+            return left.Equals(Parse(right));
+        }
+
+        public static bool operator !=(Unit left, string right)
+        {
+            return !(left == right);
+        }
+        public static bool operator ==(string left, Unit right)
+        {
+            return right == left;
+        }
+
+        public static bool operator !=(string left, Unit right)
+        {
+            return right != left;
         }
 
         /// <summary>
@@ -317,7 +351,6 @@ namespace PhysicalUnits
                 }
             }
         }
-
         public override bool Equals(object? obj)
         {
             if (obj is not Unit a)
