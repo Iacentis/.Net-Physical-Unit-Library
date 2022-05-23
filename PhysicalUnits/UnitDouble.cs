@@ -330,37 +330,41 @@ namespace PhysicalUnits
 
         public static UnitDouble Multiply(UnitDouble left, UnitDouble right)
         {
-            throw new NotImplementedException();
+            return left*right;
         }
 
         public static UnitDouble Divide(UnitDouble left, UnitDouble right)
         {
-            throw new NotImplementedException();
+            return left*right;
         }
 
         public static UnitDouble Add(UnitDouble left, UnitDouble right)
         {
-            throw new NotImplementedException();
+            return left+right;
         }
 
         public static UnitDouble Subtract(UnitDouble left, UnitDouble right)
         {
-            throw new NotImplementedException();
+            return left-right;
         }
 
         public double ToDouble()
         {
-            throw new NotImplementedException();
+            return Value;
         }
 
         public Unit ToUnit()
         {
-            throw new NotImplementedException();
+            return Unit;
         }
 
-        public UnitDouble ToUnitDouble()
+        public static UnitDouble FromDouble(double value)
         {
-            throw new NotImplementedException();
+            return value;
+        }
+        public static UnitDouble FromUnit(Unit value)
+        {
+            return value;
         }
     }
 }

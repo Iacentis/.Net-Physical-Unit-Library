@@ -12,8 +12,31 @@ namespace PhysicalUnits
         /// An array holding the log10 exponents corresponding to the size of the Unit, such as 3 for kilo
         /// </summary>
         internal int[] SizeExponent = new int[7];
-
+        /// <summary>
+        /// The effective scale factor of the unit
+        /// </summary>
         public double ScaleFactor { get; internal set; } = 1;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="SecondExponent"></param>
+        /// <param name="MetreExponent"></param>
+        /// <param name="GramExponent"></param>
+        /// <param name="AmpereExponent"></param>
+        /// <param name="KelvinExponent"></param>
+        /// <param name="MoleExponent"></param>
+        /// <param name="CandelaExponent"></param>
+        public Unit(int SecondExponent = 0, int MetreExponent = 0, int GramExponent = 0, int AmpereExponent = 0, int KelvinExponent = 0, int MoleExponent = 0, int CandelaExponent = 0)
+        {
+            ScaleFactor = 1;
+            SIExponents[0] = SecondExponent;
+            SIExponents[1] = MetreExponent;
+            SIExponents[2] = GramExponent;
+            SIExponents[3] = AmpereExponent;
+            SIExponents[4] = KelvinExponent;
+            SIExponents[5] = MoleExponent;
+            SIExponents[6] = CandelaExponent;
+        }
         /// <summary>
         /// Implementation of IEquatable
         /// </summary>
@@ -294,17 +317,6 @@ namespace PhysicalUnits
                 }
             }
         }
-        public Unit(int SecondExponent = 0, int MetreExponent = 0, int GramExponent = 0, int AmpereExponent = 0, int KelvinExponent = 0, int MoleExponent = 0, int CandelaExponent = 0)
-        {
-            ScaleFactor = 1;
-            SIExponents[0] = SecondExponent;
-            SIExponents[1] = MetreExponent;
-            SIExponents[2] = GramExponent;
-            SIExponents[3] = AmpereExponent;
-            SIExponents[4] = KelvinExponent;
-            SIExponents[5] = MoleExponent;
-            SIExponents[6] = CandelaExponent;
-        }
 
         public override bool Equals(object? obj)
         {
@@ -323,22 +335,22 @@ namespace PhysicalUnits
 
         public static Unit Multiply(Unit left, Unit right)
         {
-            throw new NotImplementedException();
+            return left * right;
         }
 
         public static Unit Divide(Unit left, Unit right)
         {
-            throw new NotImplementedException();
-        }
-
-        public static Unit Xor(Unit left, Unit right)
-        {
-            throw new NotImplementedException();
+            return left / right;
         }
 
         public static Unit Add(Unit left, Unit right)
         {
-            throw new NotImplementedException();
+            return left + right;
+        }
+
+        public static Unit Xor(Unit left, int right)
+        {
+            return left ^ right;
         }
     }
 }

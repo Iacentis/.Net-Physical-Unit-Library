@@ -293,17 +293,21 @@ namespace PhysicalUnits
 
         public Unit ToUnit()
         {
-            throw new NotImplementedException();
+            return Unit;
         }
 
-        public UnitInt ToUnitInt()
+        public static UnitInt ToUnitInt(int value)
         {
-            throw new NotImplementedException();
+            return value;
+        }
+        public static UnitInt ToUnitInt(Unit value)
+        {
+            return value;
         }
 
         public int ToInt32()
         {
-            throw new NotImplementedException();
+            return Value;
         }
     }
 }
