@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -9,6 +9,20 @@
 		<Authors>Iacentis</Authors>
 		<AnalysisLevel>latest-all</AnalysisLevel>
 		<SignAssembly>False</SignAssembly>
+		<LangVersion>preview</LangVersion>
+		<EnablePreviewFeatures>true</EnablePreviewFeatures>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Runtime.Experimental"
+		   Version="6.0.0-preview.7.21377.19" />
+	</ItemGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <WarningLevel>7</WarningLevel>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <WarningLevel>7</WarningLevel>
 	</PropertyGroup>
 
 </Project>

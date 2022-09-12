@@ -2,12 +2,12 @@
 
 namespace PhysicalUnits
 {
-    public struct UnitDouble : IEquatable<UnitDouble>, IEquatable<double>, IComparable, IComparable<UnitDouble>, IComparable<double>, IComparable<UnitInt>, IComparable<int>
+    public struct PhysicalUnit<T> : IParseable,  IEquatable<double>, IComparable, IComparable<double>, IComparable<int>, IEquatable<PhysicalUnit<T>>
     {
-        public double Value { get; set; }
+        public T Value { get; set; }
         public Unit Unit { get; set; } = Units.None;
 
-        public UnitDouble(double value, Unit unit)
+        public PhysicalUnit(double value, Unit unit)
         {
             Value = value;
             Unit = unit;
@@ -21,7 +21,7 @@ namespace PhysicalUnits
             return Value.ToString(formatProvider) + ' ' + Unit.ToString();
         }
 
-        public static UnitDouble Parse(string source, IFormatProvider? formatProvider = null)
+        public static PhysicalUnit<T> Parse(string source, IFormatProvider? formatProvider = null)
         {
             if (source is null)
             {
@@ -36,7 +36,7 @@ namespace PhysicalUnits
         }
 
 
-        public static UnitDouble operator *(UnitDouble left, UnitDouble right)
+        public static PhysicalUnit<T> operator *(PhysicalUnit<T> left, PhysicalUnit<T> right) where T: INumber<T>
         {
             return new()
             {
@@ -45,7 +45,7 @@ namespace PhysicalUnits
             };
         }
 
-        public static UnitDouble operator *(UnitDouble left, double right)
+        public static PhysicalUnit operator *(PhysicalUnit left, double right)
         {
             return new()
             {
@@ -54,7 +54,7 @@ namespace PhysicalUnits
             };
         }
 
-        public static UnitDouble operator *(UnitDouble left, int right)
+        public static PhysicalUnit operator *(PhysicalUnit left, int right)
         {
             return new()
             {
@@ -63,7 +63,7 @@ namespace PhysicalUnits
             };
         }
 
-        public static UnitDouble operator /(UnitDouble left, UnitDouble right)
+        public static PhysicalUnit operator /(PhysicalUnit left, PhysicalUnit right)
         {
             return new()
             {
@@ -72,7 +72,7 @@ namespace PhysicalUnits
             };
         }
 
-        public static UnitDouble operator /(UnitDouble left, double right)
+        public static PhysicalUnit operator /(PhysicalUnit left, double right)
         {
             return new()
             {
@@ -81,7 +81,7 @@ namespace PhysicalUnits
             };
         }
 
-        public static UnitDouble operator /(UnitDouble left, int right)
+        public static PhysicalUnit operator /(PhysicalUnit left, int right)
         {
             return new()
             {
@@ -90,7 +90,7 @@ namespace PhysicalUnits
             };
         }
 
-        public static UnitDouble operator /(double left, UnitDouble right)
+        public static PhysicalUnit operator /(double left, PhysicalUnit right)
         {
             return new()
             {
@@ -99,7 +99,7 @@ namespace PhysicalUnits
             };
         }
 
-        public static UnitDouble operator /(int left, UnitDouble right)
+        public static PhysicalUnit operator /(int left, PhysicalUnit right)
         {
             return new()
             {
@@ -108,7 +108,7 @@ namespace PhysicalUnits
             };
         }
 
-        public static UnitDouble operator +(UnitDouble left, UnitDouble right)
+        public static PhysicalUnit operator +(PhysicalUnit left, PhysicalUnit right)
         {
             return new()
             {
@@ -117,7 +117,7 @@ namespace PhysicalUnits
             };
         }
 
-        public static UnitDouble operator +(UnitDouble left, double right)
+        public static PhysicalUnit operator +(PhysicalUnit left, double right)
         {
             return new()
             {
@@ -126,7 +126,7 @@ namespace PhysicalUnits
             };
         }
 
-        public static UnitDouble operator -(UnitDouble left, UnitDouble right)
+        public static PhysicalUnit operator -(PhysicalUnit left, PhysicalUnit right)
         {
             return new()
             {
@@ -135,7 +135,7 @@ namespace PhysicalUnits
             };
         }
 
-        public static UnitDouble operator -(UnitDouble left, double right)
+        public static PhysicalUnit operator -(PhysicalUnit left, double right)
         {
             return new()
             {
@@ -144,37 +144,37 @@ namespace PhysicalUnits
             };
         }
 
-        public static UnitDouble operator *(double left, UnitDouble right)
+        public static PhysicalUnit operator *(double left, PhysicalUnit right)
         {
             return right * left;
         }
 
-        public static UnitDouble operator +(double left, UnitDouble right)
+        public static PhysicalUnit operator +(double left, PhysicalUnit right)
         {
             return right + left;
         }
 
-        public static UnitDouble operator -(double left, UnitDouble right)
+        public static PhysicalUnit operator -(double left, PhysicalUnit right)
         {
             return right - left;
         }
 
-        public static implicit operator double(UnitDouble value)
+        public static implicit operator double(PhysicalUnit value)
         {
             return value.Value;
         }
 
-        public static implicit operator Unit(UnitDouble value)
+        public static implicit operator Unit(PhysicalUnit value)
         {
             return value.Unit;
         }
 
-        public static implicit operator UnitDouble(double value)
+        public static implicit operator PhysicalUnit(double value)
         {
             return new(value, Units.None);
         }
 
-        public static implicit operator UnitDouble(Unit unit)
+        public static implicit operator PhysicalUnit(Unit unit)
         {
             return new(0, unit);
         }
@@ -189,7 +189,7 @@ namespace PhysicalUnits
             return base.GetHashCode();
         }
 
-        public bool Equals(UnitDouble other)
+        public bool Equals(PhysicalUnit other)
         {
             return (other.Value == Value) && (other.Unit == Unit);
         }
@@ -201,7 +201,7 @@ namespace PhysicalUnits
 
         public int CompareTo(object? obj)
         {
-            if (obj is UnitDouble ud)
+            if (obj is PhysicalUnit ud)
             {
                 return CompareTo(ud);
             }
@@ -216,9 +216,9 @@ namespace PhysicalUnits
                 return CompareTo(ui);
             }
 
-            throw new ArgumentException($"Invalid comparison type for {typeof(UnitDouble)}: {obj?.GetType()}", nameof(obj));
+            throw new ArgumentException($"Invalid comparison type for {typeof(PhysicalUnit)}: {obj?.GetType()}", nameof(obj));
         }
-        public int CompareTo(UnitDouble other)
+        public int CompareTo(PhysicalUnit other)
         {
             return (int)(Value - other.Value);
         }
@@ -238,112 +238,112 @@ namespace PhysicalUnits
             return Value.CompareTo(other);
         }
 
-        public static bool operator ==(UnitDouble left, UnitDouble right)
+        public static bool operator ==(PhysicalUnit left, PhysicalUnit right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator ==(double left, UnitDouble right)
+        public static bool operator ==(double left, PhysicalUnit right)
         {
             return left.Equals(right.Value);
         }
 
-        public static bool operator ==(UnitDouble left, double right)
+        public static bool operator ==(PhysicalUnit left, double right)
         {
             return right == left;
         }
 
-        public static bool operator !=(UnitDouble left, UnitDouble right)
+        public static bool operator !=(PhysicalUnit left, PhysicalUnit right)
         {
             return !(left == right);
         }
 
-        public static bool operator !=(double left, UnitDouble right)
+        public static bool operator !=(double left, PhysicalUnit right)
         {
             return !(left == right);
         }
 
-        public static bool operator !=(UnitDouble left, double right)
+        public static bool operator !=(PhysicalUnit left, double right)
         {
             return right != left;
         }
 
-        public static bool operator <(UnitDouble left, UnitDouble right)
+        public static bool operator <(PhysicalUnit left, PhysicalUnit right)
         {
             return left.CompareTo(right) < 0;
         }
 
-        public static bool operator <=(UnitDouble left, UnitDouble right)
+        public static bool operator <=(PhysicalUnit left, PhysicalUnit right)
         {
             return left.CompareTo(right) <= 0;
         }
 
-        public static bool operator >(UnitDouble left, UnitDouble right)
+        public static bool operator >(PhysicalUnit left, PhysicalUnit right)
         {
             return left.CompareTo(right) > 0;
         }
 
-        public static bool operator >=(UnitDouble left, UnitDouble right)
+        public static bool operator >=(PhysicalUnit left, PhysicalUnit right)
         {
             return left.CompareTo(right) >= 0;
         }
 
-        public static bool operator <(UnitDouble left, double right)
+        public static bool operator <(PhysicalUnit left, double right)
         {
             return left.CompareTo(right) < 0;
         }
 
-        public static bool operator <=(UnitDouble left, double right)
+        public static bool operator <=(PhysicalUnit left, double right)
         {
             return left.CompareTo(right) <= 0;
         }
 
-        public static bool operator >(UnitDouble left, double right)
+        public static bool operator >(PhysicalUnit left, double right)
         {
             return left.CompareTo(right) > 0;
         }
 
-        public static bool operator >=(UnitDouble left, double right)
+        public static bool operator >=(PhysicalUnit left, double right)
         {
             return left.CompareTo(right) >= 0;
         }
 
-        public static bool operator <(UnitDouble left, UnitInt right)
+        public static bool operator <(PhysicalUnit left, UnitInt right)
         {
             return left.CompareTo(right) < 0;
         }
 
-        public static bool operator <=(UnitDouble left, UnitInt right)
+        public static bool operator <=(PhysicalUnit left, UnitInt right)
         {
             return left.CompareTo(right) <= 0;
         }
 
-        public static bool operator >(UnitDouble left, UnitInt right)
+        public static bool operator >(PhysicalUnit left, UnitInt right)
         {
             return left.CompareTo(right) > 0;
         }
 
-        public static bool operator >=(UnitDouble left, UnitInt right)
+        public static bool operator >=(PhysicalUnit left, UnitInt right)
         {
             return left.CompareTo(right) >= 0;
         }
 
-        public static UnitDouble Multiply(UnitDouble left, UnitDouble right)
+        public static PhysicalUnit Multiply(PhysicalUnit left, PhysicalUnit right)
         {
             return left*right;
         }
 
-        public static UnitDouble Divide(UnitDouble left, UnitDouble right)
+        public static PhysicalUnit Divide(PhysicalUnit left, PhysicalUnit right)
         {
             return left*right;
         }
 
-        public static UnitDouble Add(UnitDouble left, UnitDouble right)
+        public static PhysicalUnit Add(PhysicalUnit left, PhysicalUnit right)
         {
             return left+right;
         }
 
-        public static UnitDouble Subtract(UnitDouble left, UnitDouble right)
+        public static PhysicalUnit Subtract(PhysicalUnit left, PhysicalUnit right)
         {
             return left-right;
         }
@@ -358,13 +358,18 @@ namespace PhysicalUnits
             return Unit;
         }
 
-        public static UnitDouble FromDouble(double value)
+        public static PhysicalUnit FromDouble(double value)
         {
             return value;
         }
-        public static UnitDouble FromUnit(Unit value)
+        public static PhysicalUnit FromUnit(Unit value)
         {
             return value;
+        }
+
+        public bool Equals(PhysicalUnit<T> other)
+        {
+            throw new NotImplementedException();
         }
     }
 }
