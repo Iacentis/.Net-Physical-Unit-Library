@@ -2,7 +2,7 @@
 
 namespace PhysicalUnits
 {
-    public class Unit : IEquatable<Unit>
+    public struct Unit : IEquatable<Unit>
     {
         /// <summary>
         /// An array holding the exponents of the SI Units involved in the Unit
@@ -28,7 +28,6 @@ namespace PhysicalUnits
         /// <param name="CandelaExponent"></param>
         public Unit(int SecondExponent = 0, int MetreExponent = 0, int GramExponent = 0, int AmpereExponent = 0, int KelvinExponent = 0, int MoleExponent = 0, int CandelaExponent = 0)
         {
-            ScaleFactor = 1;
             SIExponents[0] = SecondExponent;
             SIExponents[1] = MetreExponent;
             SIExponents[2] = GramExponent;
@@ -37,18 +36,17 @@ namespace PhysicalUnits
             SIExponents[5] = MoleExponent;
             SIExponents[6] = CandelaExponent;
         }
+        public Unit(double scaleFactor, int SecondExponent = 0, int MetreExponent = 0, int GramExponent = 0, int AmpereExponent = 0, int KelvinExponent = 0, int MoleExponent = 0, int CandelaExponent = 0) : this(SecondExponent, MetreExponent, GramExponent, AmpereExponent, KelvinExponent, MoleExponent, CandelaExponent)
+        {
+            ScaleFactor = scaleFactor;
+        }
         /// <summary>
         /// Implementation of IEquatable
         /// </summary>
         /// <param name="other">The Unit to check equality against</param>
         /// <returns>A bool indicating whether the Units are equal or not</returns>
-        public bool Equals(Unit? other)
+        public bool Equals(Unit other)
         {
-            if (other is null)
-            {
-                return false;
-            }
-
             if (!Compatible(other))
             {
                 return false;
@@ -56,13 +54,11 @@ namespace PhysicalUnits
 
             for (int i = 0; i < 7; i++)
             {
-                if (SIExponents[i] != 0)
+                if (SIExponents[i] == 0 || SizeExponent[i] == other.SizeExponent[i])
                 {
-                    if (SizeExponent[i] != other.SizeExponent[i])
-                    {
-                        return false;
-                    }
+                    continue;
                 }
+                return false;
             }
             return true;
         }
@@ -73,11 +69,6 @@ namespace PhysicalUnits
         /// <returns>A bool indicating whether addition/subtraction is valid</returns>
         public bool Compatible(Unit other)
         {
-            if (other is null)
-            {
-                throw new ArgumentNullException(nameof(other));
-            }
-
             for (int i = 0; i < 7; i++)
             {
                 if (SIExponents[i] != other.SIExponents[i])
@@ -92,16 +83,6 @@ namespace PhysicalUnits
         /// </summary>
         public static Unit operator *(Unit left, Unit right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
-
             Unit result = new(0);
             for (int i = 0; i < 7; i++)
             {
@@ -113,16 +94,6 @@ namespace PhysicalUnits
         }
         public static Unit operator /(Unit left, Unit right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
-
             Unit result = new(0);
             for (int i = 0; i < 7; i++)
             {
@@ -153,16 +124,6 @@ namespace PhysicalUnits
         }
         public static Unit operator +(Unit left, Unit right)
         {
-            if (left is null)
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-
-            if (right is null)
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
-
             if (!left.Equals(right))
             {
                 throw new ArgumentException("Units must be equal to perform addition");
@@ -207,10 +168,6 @@ namespace PhysicalUnits
         }
         public static bool operator ==(Unit left, Unit right)
         {
-            if (left is null)
-            {
-                return right is null;
-            }
             return left.Equals(right);
         }
 
@@ -220,10 +177,6 @@ namespace PhysicalUnits
         }
         public static bool operator ==(Unit left, string right)
         {
-            if (left is null)
-            {
-                return false;
-            }
             return left.Equals(Parse(right));
         }
 
@@ -385,5 +338,6 @@ namespace PhysicalUnits
         {
             return left ^ right;
         }
+
     }
 }
