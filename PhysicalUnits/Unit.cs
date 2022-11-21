@@ -170,6 +170,10 @@ namespace PhysicalUnits
         {
             return right * left;
         }
+        public static Unit operator *(double left, Unit right)
+        {
+            return Multiply(left, right);
+        }
         public static bool operator ==(Unit left, Unit right)
         {
             return left.Equals(right);
@@ -341,6 +345,12 @@ namespace PhysicalUnits
         public static Unit Xor(Unit left, int right)
         {
             return left ^ right;
+        }
+        public static Unit Multiply(double left, Unit right)
+        {
+            Unit result = right;
+            result.ScaleFactor *= left;
+            return result;
         }
 
     }

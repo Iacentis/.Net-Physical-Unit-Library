@@ -29,7 +29,7 @@ namespace PhysicalValues
 
             return new()
             {
-                Value = T.Parse(source.AsSpan()[..(UnitStart-1)], formatProvider),
+                Value = T.Parse(source.AsSpan()[..UnitStart], formatProvider),
                 Unit = Unit.Parse(source[UnitStart..])
             };
         }
@@ -101,7 +101,7 @@ namespace PhysicalValues
         {
             return new()
             {
-                Value = left.Value + right.Value,
+                Value = left.Value + T.CreateChecked(right.Unit.ScaleFactor) / T.CreateChecked(left.Unit.ScaleFactor) * right.Value,
                 Unit = left.Unit + right.Unit
             };
         }
@@ -117,7 +117,7 @@ namespace PhysicalValues
         {
             return new()
             {
-                Value = left.Value - right.Value,
+                Value = left.Value - T.CreateChecked(right.Unit.ScaleFactor) / T.CreateChecked(left.Unit.ScaleFactor) * right.Value,
                 Unit = left.Unit + right.Unit,
             };
         }

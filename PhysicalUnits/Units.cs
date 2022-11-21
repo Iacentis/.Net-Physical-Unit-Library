@@ -69,7 +69,10 @@ namespace PhysicalUnits
         public static Unit Sievert => Gray;
         [Symbol("kat")]
         public static Unit Katal => Mole / Seconds;
-
+        [Symbol("min")]
+        public static Unit Minute => 60 * Seconds;
+        [Symbol("h")]
+        public static Unit Hour => 3600 * Seconds;
         public static Dictionary<string, Unit> BySymbol { get; } = new();
 
     }
