@@ -4,15 +4,6 @@
     {
         public static double Convert(this double value, Unit from, Unit to)
         {
-            if (from is null)
-            {
-                throw new ArgumentNullException(nameof(from));
-            }
-
-            if (to is null)
-            {
-                throw new ArgumentNullException(nameof(to));
-            }
 
             if (!from.Compatible(to))
             {
@@ -23,16 +14,6 @@
         }
         public static int Convert(this int value, Unit from, Unit to)
         {
-            if (from is null)
-            {
-                throw new ArgumentNullException(nameof(from));
-            }
-
-            if (to is null)
-            {
-                throw new ArgumentNullException(nameof(to));
-            }
-
             if (!from.Compatible(to))
             {
                 throw new ArgumentException("Units must be compatible to perform addition");
@@ -109,7 +90,7 @@
         /// </summary>
         internal static bool TryGetCompositeUnit(ref Unit result, int exponent, string PreexponentString)
         {
-            if (Units.BySymbol.TryGetValue(PreexponentString, out Unit? composite))
+            if (Units.BySymbol.TryGetValue(PreexponentString, out Unit composite))
             {
                 for (int j = 0; j < exponent; j++)
                 {
@@ -119,7 +100,7 @@
             }
             if (PreexponentString.Length > 1)
             {
-                if (Units.BySymbol.TryGetValue(PreexponentString[1..], out Unit? subcomposite))
+                if (Units.BySymbol.TryGetValue(PreexponentString[1..], out Unit subcomposite))
                 {
 
                     MetricPrefixExponents sizeExp = UnitSymbolLibrary.FromPrefixSymbol(PreexponentString[0]);

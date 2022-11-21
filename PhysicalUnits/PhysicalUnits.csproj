@@ -1,14 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Authors>Iacentis</Authors>
-		<AnalysisLevel>latest-all</AnalysisLevel>
-		<SignAssembly>False</SignAssembly>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\UnitsGenerator\UnitsGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly ="false"/>
+	</ItemGroup>
 
 </Project>

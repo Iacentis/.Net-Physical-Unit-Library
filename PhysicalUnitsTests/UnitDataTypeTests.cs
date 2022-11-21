@@ -131,5 +131,6 @@ namespace DataTypesTests
             Assert.Throws<ArgumentException>(() => val.Convert(Units.Kilogram, Units.Katal));
             Assert.Throws<ArgumentException>(() => val.Convert(Units.Pascal, Units.Newton));
         }
+
     }
 }
