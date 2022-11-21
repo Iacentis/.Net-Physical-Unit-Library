@@ -21,53 +21,53 @@ namespace PhysicalUnits
         public static Unit Candela => new(0, 0, 0, 0, 0, 0, 1);
         //Derived from SI units
 
-        [UnitSymbol("m^2")]
+        [Symbol("m^2")]
         public static Unit Area => Metre * Metre;
-        [UnitSymbol("m^3")]
+        [Symbol("m^3")]
         public static Unit Volume => Metre ^ 3;
-        [UnitSymbol("m/s")]
+        [Symbol("m/s")]
         public static Unit Velocity => Metre / Seconds;
-        [UnitSymbol("m/s^2")]
+        [Symbol("m/s^2")]
         public static Unit Acceleration => Metre / (Seconds ^ 2);
-        [UnitSymbol("\u0929")]
+        [Symbol("ρ")]
         public static Unit Density => Kilogram / Volume;
-        [UnitSymbol("N")]
+        [Symbol("N")]
         public static Unit Newton => Kilogram * Acceleration;
-        [UnitSymbol("Pa")]
+        [Symbol("Pa")]
         public static Unit Pascal => Newton / Area;
-        [UnitSymbol("\u0957")]
+        [Symbol("μ")]
         public static Unit Viscosity => Pascal * Seconds;
-        [UnitSymbol("Hz")]
+        [Symbol("Hz")]
         public static Unit Hertz => None / Seconds;
-        [UnitSymbol("J")]
+        [Symbol("J")]
         public static Unit Joule => Newton * Metre;
-        [UnitSymbol("W")]
+        [Symbol("W")]
         public static Unit Watt => Joule / Seconds;
-        [UnitSymbol("C")]
+        [Symbol("C")]
         public static Unit Coulomb => Seconds * Ampere;
-        [UnitSymbol("V")]
+        [Symbol("V")]
         public static Unit Volt => Watt / Ampere;
-        [UnitSymbol("F")]
+        [Symbol("F")]
         public static Unit Farad => Coulomb / Volt;
-        [UnitSymbol("\u0937")]
+        [Symbol("Ω")]
         public static Unit Ohm => Volt / Ampere;
-        [UnitSymbol("S")]
+        [Symbol("S")]
         public static Unit Siemens => None / Ohm;
-        [UnitSymbol("Mx")]
+        [Symbol("Mx")]
         public static Unit Weber => Joule / Ampere;
-        [UnitSymbol("T")]
+        [Symbol("T")]
         public static Unit Tesla => Volt * Seconds / Area;
-        [UnitSymbol("H")]
+        [Symbol("H")]
         public static Unit Henry => Volt * Seconds / Ampere;
-        [UnitSymbol("lm")]
+        [Symbol("lm")]
         public static Unit Lumen => Candela;
-        [UnitSymbol("lx")]
+        [Symbol("lx")]
         public static Unit Lux => Candela / Area;
-        [UnitSymbol("Gy")]
+        [Symbol("Gy")]
         public static Unit Gray => Joule / Kilogram;
-        [UnitSymbol("Sv")]
+        [Symbol("Sv")]
         public static Unit Sievert => Gray;
-        [UnitSymbol("kat")]
+        [Symbol("kat")]
         public static Unit Katal => Mole / Seconds;
 
         public static Dictionary<string, Unit> BySymbol { get; } = new();

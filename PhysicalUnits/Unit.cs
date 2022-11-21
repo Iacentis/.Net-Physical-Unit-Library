@@ -40,6 +40,10 @@ namespace PhysicalUnits
         {
             ScaleFactor = scaleFactor;
         }
+        public Unit()
+        {
+
+        }
         /// <summary>
         /// Implementation of IEquatable
         /// </summary>
@@ -83,7 +87,7 @@ namespace PhysicalUnits
         /// </summary>
         public static Unit operator *(Unit left, Unit right)
         {
-            Unit result = new(0);
+            Unit result = new();
             for (int i = 0; i < 7; i++)
             {
                 result.SizeExponent[i] = left.SizeExponent[i] + right.SizeExponent[i];
@@ -94,7 +98,7 @@ namespace PhysicalUnits
         }
         public static Unit operator /(Unit left, Unit right)
         {
-            Unit result = new(0);
+            Unit result = new();
             for (int i = 0; i < 7; i++)
             {
                 result.SizeExponent[i] = left.SizeExponent[i] - right.SizeExponent[i];

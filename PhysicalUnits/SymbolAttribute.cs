@@ -3,10 +3,10 @@
 namespace PhysicalUnits
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class UnitSymbolAttribute : Attribute
+    public sealed class SymbolAttribute : Attribute
     {
         public string Value { get; private set; }
-        public UnitSymbolAttribute(string value)
+        public SymbolAttribute(string value)
         {
             Value = value;
         }
